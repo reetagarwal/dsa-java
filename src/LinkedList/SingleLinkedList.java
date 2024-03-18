@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.LinkedList;
+
 public class SingleLinkedList {
     public static class Node{
         int data;
@@ -128,17 +130,17 @@ public class SingleLinkedList {
         return val;
     }
 
-    //find and remove nth node from end
+    //find and remove nth node from end-very imp for interviews
     public void deleteNthFromEnd(int n){
-        //calculate size
+        //calculate size:since in competitions we need to calculate the size ourself
         int size=0;
         Node temp=head;
         while(temp!=null){
-            temp=temp.next;
+            temp=temp.next;//traversing
             size++;
         }
         if(n==size){//this is the corner case for deleting head
-            head=head.next;//remove first
+            head=head.next;//remove first(removing head)
             return;
         }
         int i=1;
@@ -195,9 +197,9 @@ public class SingleLinkedList {
     }
 
     public void reverse(){
-        Node t1=head;//t1 means prev
-        Node t2=t1.next;//t2 means curr
-        Node t3=t2.next;//t3 means next
+        Node t1=head;
+        Node t2=t1.next;
+        Node t3=t2.next;
         t1.next=null;
         t2.next=t1;
         while(t3!=null){
@@ -209,23 +211,36 @@ public class SingleLinkedList {
         head=t2;
     }
 
-    public Node findMid(Node head){//slow-fast approach
+    public void reversee2(){
+        Node prev=null;
+        Node curr=tail=head;
+        Node next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+    }
+
+    public Node findMid(Node head){//slow-fast approach or turtle-hare approach
         Node slow=head;
         Node fast=head;
-        while(fast!=null && fast.next!=null){
+        while(fast!=null && fast.next!=null){//even and odd condition
             slow=slow.next;//+1
             fast=fast.next.next;//+2
         }
         return slow;//slow is my middle node
     }
 
-    public boolean palindrome(){
-        if(head==null || head.next==null){
+    public boolean palindrome(){//will return true or false
+        if(head==null || head.next==null){//corner case or base case
             return true;
         }
         Node midNode=findMid(head);
         Node prev=null;
-        Node current=midNode;
+        Node current=midNode;//node current = slow
         Node next;
         while(current!=null){
             next=current.next;
@@ -233,7 +248,7 @@ public class SingleLinkedList {
             prev=current;
             current=next;
         }
-        Node right=prev;//right half head
+        Node right=prev;//right half ka head
         Node left=head;
         while(right!=null){
             if(left.data!=right.data){
@@ -243,6 +258,99 @@ public class SingleLinkedList {
             right=right.next;
         }
         return true;
+    }
+
+    public static boolean Cycledetect(){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void removeCycle(){
+        Node slow=head;
+        Node fast=head;
+        boolean flag=false;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                flag=true;
+                break;
+            }
+        }
+
+        if(flag==false){
+            return;
+        }
+
+        //meeting point
+        slow=head;
+        Node prev=null;//last node
+        while(slow!=fast){
+            prev=fast;
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        prev.next=null;
+    }
+
+    private Node getMid(Node head){
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public Node mergeSort(Node head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        Node mid=getMid(head);
+
+        Node rightHead=mid.next;
+        mid.next=null;
+        Node newLeft=mergeSort(head);
+        Node newRight=mergeSort(rightHead);
+
+        return merge(newLeft,newRight);
+    }
+    private Node merge(Node head1,Node head2){
+        Node mergedLl=new Node(-1);
+        Node temp=mergedLl;
+
+        while(head1!=null && head2!=null){
+            if(head1.data<=head2.data){
+                temp.next=head1;
+                head1=head1.next;
+                temp=temp.next;
+            }
+            else{
+                temp.next=head2;
+                head2=head2.next;
+                temp=temp.next;
+            }
+        }
+        while(head1!=null){
+            temp.next=head1;
+            head1=head1.next;
+            temp=temp.next;
+        }
+        while(head1!=null){
+            temp.next=head1;
+            head1=head1.next;
+            temp=temp.next;
+        }
+        return mergedLl.next;
     }
 
     public void display(){
@@ -260,14 +368,14 @@ public class SingleLinkedList {
 
 
     public static void main(String[] args) {
-       SingleLinkedList ll=new SingleLinkedList();
-       ll.add_beg(2);
-       ll.add_beg(1);
-//       ll.add_end(3);
-//       ll.add_end(4);
-//       ll.add_pos(2,7);
-        System.out.println(ll.palindrome());
-       ll.display();
+//       SingleLinkedList ll=new SingleLinkedList();
+//       ll.add_beg(2);
+//       ll.add_beg(1);
+////       ll.add_end(3);
+////       ll.add_end(4);
+////       ll.add_pos(2,7);
+//        System.out.println(ll.palindrome());
+//       ll.display();
 //       ll.delete_beg();
 ////     ll.delete_end();
 //       ll.delete_last();
@@ -280,6 +388,31 @@ public class SingleLinkedList {
 //       ll.deleteNthFromEnd(3);
 //       ll.display();
 //     System.out.println(ll.size);
+
+        //for cycle wala
+//        head=new Node(1);
+//        Node temp=new Node(3);
+//        head.next=temp;
+//        head.next.next=new Node(3);
+//        head.next.next.next=temp;
+//        System.out.println(Cycledetect());
+//        removeCycle();
+//        System.out.println(Cycledetect());
+
+
+
+        SingleLinkedList ll=new SingleLinkedList();
+        ll.add_beg(1);
+        ll.add_beg(2);
+        ll.add_beg(3);
+        ll.add_beg(4);
+        ll.add_beg(5);
+        ll.display();
+        ll.head=ll.mergeSort(ll.head);
+        ll.display();
+
+
+
     }
 }
 
