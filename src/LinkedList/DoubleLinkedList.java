@@ -29,7 +29,33 @@ public class DoubleLinkedList {
         head=newNode;
     }
 
+    public void delete_beg(){
+        if(head==null){
+            System.out.println("empty");
+        }
+        if(head.next==null){
+            head=tail=null;
+            size--;
+            return;
+        }
+        head=head.next;
+        head.prev=null;
+        size--;
+    }
 
+    public void reverse(){
+        Node curr=head;
+        Node prev=null;
+        Node next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            curr.prev=next;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+    }
     public void display(){
         Node temp=head;
         while(temp!=null){
@@ -45,5 +71,10 @@ public class DoubleLinkedList {
         dll.add_beg(8);
         dll.display();
         System.out.println(dll.size);
+        dll.delete_beg();
+        dll.display();
+        System.out.println(dll.size);
+        dll.reverse();
+        dll.display();
     }
 }
