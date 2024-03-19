@@ -365,7 +365,7 @@ public class SingleLinkedList {
 
         //s2-reversing the second half
         Node curr=mid.next;
-        mid.next=null;
+        mid.next=null;//to break it into parts so that both are pointing towards null
         Node prev=null;
         Node next;
         while(curr!=null){
