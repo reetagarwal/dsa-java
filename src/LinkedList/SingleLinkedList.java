@@ -354,6 +354,7 @@ public class SingleLinkedList {
     }
 
     public void zigZag(){
+        //s1-finding mid
         Node slow=head;
         Node fast=head.next;
         while(fast!=null && fast.next!=null){
@@ -362,6 +363,7 @@ public class SingleLinkedList {
         }
         Node mid=slow;
 
+        //s2-reversing the second half
         Node curr=mid.next;
         mid.next=null;
         Node prev=null;
@@ -376,6 +378,7 @@ public class SingleLinkedList {
         Node right=prev;
         Node nextL,nextR;
 
+        //s3-alternate merging
         while(left!=null && right!=null){
             nextL=left.next;
             left.next=right;
