@@ -353,7 +353,7 @@ public class SingleLinkedList {
         return mergedLl.next;
     }
 
-    public void zigzag(){
+    public void zigZag(){
         Node slow=head;
         Node fast=head.next;
         while(fast!=null && fast.next!=null){
