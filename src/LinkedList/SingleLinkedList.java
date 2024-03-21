@@ -384,8 +384,8 @@ public class SingleLinkedList {
             left.next=right;
             nextR=right.next;
             right.next=nextL;
-            left=nextL;
-            right=nextR;
+            left=nextL;//updating
+            right=nextR;//updating
         }
     }
 
