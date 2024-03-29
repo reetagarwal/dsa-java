@@ -12,6 +12,10 @@ public class LinkedHashset {
         set.add("Chennai");
         System.out.println(set);
 
+        set.remove("Delhi");
+
+        System.out.println(set);
+
     }
 }
 
