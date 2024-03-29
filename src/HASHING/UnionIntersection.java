@@ -8,25 +8,25 @@ public class UnionIntersection {
         int[] arr2={6,3,9,2,9,4};
         HashSet<Integer> set=new HashSet<>();
 
-        for(int i=0;i<arr1.length;i++){
-            set.add(arr1[i]);
+        for (int k : arr1) {
+            set.add(k);
         }
-        for(int i=0;i<arr2.length;i++){
-            set.add(arr2[i]);
+        for (int j : arr2) {
+            set.add(j);
         }
 
         System.out.println("Union =" + set.size());
 
         //intersection:
         set.clear();
-        for(int i=0;i<arr1.length;i++){
-            set.add(arr1[i]);
+        for (int j : arr1) {
+            set.add(j);
         }
         int count=0;
-        for(int i=0;i<arr2.length;i++){
-            if(set.contains(arr2[i])){
+        for (int j : arr2) {
+            if (set.contains(j)) {
                 count++;
-                set.remove(arr2[i]);
+                set.remove(j);
             }
         }
 
