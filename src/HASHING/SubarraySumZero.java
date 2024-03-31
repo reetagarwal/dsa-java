@@ -7,7 +7,7 @@ public class SubarraySumZero {//O(n)
         int[] arr={15,-2,2,-8,1,7,10,23};
 
         HashMap<Integer , Integer> map=new HashMap<>();
-        //(sum,idx)
+        //(sum,idx)//we took index because we wanted
         int sum=0,len=0;
         for(int j=0;j<arr.length;j++){
             sum+=arr[j];
