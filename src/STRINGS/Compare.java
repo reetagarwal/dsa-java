@@ -5,7 +5,7 @@ public class Compare {
         String s1="Reet";
         String s2="Reet";
         String s3=new String("Reet");
-        if(s1==s2){
+        if(s1==s2){//pointing towards same
             System.out.println("Strings are equal");
         }
         else{
@@ -19,7 +19,7 @@ public class Compare {
             System.out.println("Strings are not equal");
         }
 
-        if(s1.equals(s3)){
+        if(s1.equals(s3)){//same value
             System.out.println("Strings are equal");
         }
         else{
