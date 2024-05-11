@@ -83,7 +83,6 @@ public class Part2 {
                 }
             }
         }
-
         for (int i=min;i<=max;i++){
             System.out.print(map.get(i).data+" ");
         }
