@@ -33,6 +33,9 @@ public class BST {
         return root==null;
     }
 
+    public void insert(int value){
+        root=insert(value,root);
+    }
     private Node insert(int value,Node node){
         if(node==null){
             node=new Node(value);
@@ -44,18 +47,55 @@ public class BST {
         if(value>node.value) {
             node.right = insert(value, node.right);
         }
+        node.height=Math.max(height(node.left),height(node.right));
         return node;
     }
 
+    public boolean balanced(){
+        return balanced(root);
+    }
+    private boolean balanced(Node node){
+        if(node==null){
+            return true;
+        }
+        return Math.abs(height(node.left)-height(node.right))<=1 && balanced(node.left) && balanced(node.right);
+    }
+
+    public void populate(int[] nums){
+        for(int i=0;i< nums.length;i++){
+            this.insert(nums[i]);
+        }
+    }
+
+    public void populateSorted(int[] nums){
+        populateSorted(nums,0,nums.length);
+    }
+    private void populateSorted(int[] nums,int start,int end){
+        if(start>=end){
+            return;
+        }
+        int mid=(start+end)/2;
+        this.insert(nums[mid]);
+        populateSorted(nums,start,mid);
+        populateSorted(nums,mid+1,end);
+    }
+
     public void display(){
-        display(root,"Root Node:");
+        display(this.root,"Root Node:");
     }
     private void display(Node node,String details){
         if(node==null){
             return;
         }
-        System.out.println(details+node.getValue());
-        display(node.left,"Left Child of "+node.getValue()+" : ");
-        display(node.right,"Right Child of "+node.getValue()+" : ");
+        System.out.println(details+node.value);
+        display(node.left,"Left Child of "+node.value+" : ");
+        display(node.right,"Right Child of "+node.value+" : ");
+    }
+
+    public static void main(String[] args) {
+        BST tree=new BST();
+        int[] nums={5,2,7,1,4,6,9,8,3,10};
+        tree.populate(nums);
+        tree.display();
     }
 }
