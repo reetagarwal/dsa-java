@@ -42,7 +42,7 @@ public class MaxBSTinBT {
         }
         if(leftInfo.isBST && rightInfo.isBST){//true condition
             maxBST=Math.max(maxBST,size);
-            new Info(true,size,min,max);
+            return new Info(true,size,min,max);
         }
 
         return new Info(false,size,min,max);
@@ -58,5 +58,8 @@ public class MaxBSTinBT {
         root.right.right=new Node(70);
         root.right.right.left=new Node(65);
         root.right.right.right=new Node(80);
+
+        Info info=largestBST(root);
+        System.out.println("largest BSt size="+maxBST);
     }
 }
