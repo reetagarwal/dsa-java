@@ -62,6 +62,8 @@ public class Part2 {
     }
 
 
+
+
     public static void main(String[] args) {
         int[] arr={3,5,6,8,10,11,12};
         Node root= createBST(arr,0,arr.length-1);
