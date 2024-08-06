@@ -1,4 +1,4 @@
-package daa_lab;
+package daa_lab.lab1;
 
 public class q1 {
     public static int[] largestsmallest(int arr[],int n){

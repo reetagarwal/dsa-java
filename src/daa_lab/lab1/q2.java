@@ -1,4 +1,4 @@
-package daa_lab;
+package daa_lab.lab1;
 
 public class q2 {
     public static int[] prefix(int arr[]){

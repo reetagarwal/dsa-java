@@ -1,11 +1,13 @@
-package DIVIDECONQUER;
+package daa_lab.lab4;
 
-public class QuickSort {
+//quick sort
+public class quickSort {
     public static void main(String[] args) {
         int[]arr={6,3,9,8,2,5};
         sort(arr,0,arr.length-1);
         printArr(arr);
     }
+
     public static void printArr(int[] arr) {
         for(int i=0;i<arr.length;i++){
             System.out.print(arr[i]+" ");
@@ -22,7 +24,7 @@ public class QuickSort {
         sort(arr,pIndex+1,ei);
     }
 
-    public static int partition(int[] arr, int si, int ei) {
+    private static int partition(int[] arr, int si, int ei) {
         int pivot=arr[ei];
         int i=si-1;//making space for smaller elements than pivot
 
@@ -41,6 +43,7 @@ public class QuickSort {
         arr[ei]=arr[i];
         arr[i]=temp;
         return i;
-
     }
+
+
 }

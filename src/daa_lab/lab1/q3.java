@@ -1,4 +1,4 @@
-package daa_lab;
+package daa_lab.lab1;
 
 import java.util.ArrayList;
 import java.util.List;
